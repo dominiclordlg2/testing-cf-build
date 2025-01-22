@@ -9,4 +9,4 @@ tar -czf "$ZIP_NAME" dist/
 mv "$ZIP_NAME" dist/
 
 # Upload to R2 using wrangler
-wrangler r2 object put "${R2_BUCKET_NAME}/${ZIP_NAME}" --file "dist/$ZIP_NAME"
+npx wrangler r2 object put "${R2_BUCKET_NAME}/${ZIP_NAME}" --file "dist/$ZIP_NAME"
