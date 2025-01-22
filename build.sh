@@ -7,7 +7,7 @@ if [ -d "backup" ]; then
     if [ -n "$ZIP_FILE" ]; then
         echo "Found backup zip: $ZIP_FILE"
         TEMP_DIR=$(mktemp -d)
-        unzip "$ZIP_FILE" -d "$TEMP_DIR"
+        tar -xf "$ZIP_FILE" -C "$TEMP_DIR"
 
         if [ ! -d "$TEMP_DIR/dist/_nuxt" ]; then
             echo "Error: Not a valid Nuxt app backup"
