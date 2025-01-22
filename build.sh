@@ -1,5 +1,29 @@
 # !/bin/bash
 
+# Check for zip file in backup directory
+if [ -d "backup" ]; then
+    ZIP_FILE=$(find backup -maxdepth 1 -name "*.zip" -type f | head -n 1)
+
+    if [ -n "$ZIP_FILE" ]; then
+        echo "Found backup zip: $ZIP_FILE"
+        TEMP_DIR=$(mktemp -d)
+        unzip "$ZIP_FILE" -d "$TEMP_DIR"
+
+        if [ ! -d "$TEMP_DIR/dist/_nuxt" ]; then
+            echo "Error: Not a valid Nuxt app backup"
+            rm -rf "$TEMP_DIR"
+            exit 1
+        fi
+
+        rm -rf dist
+        mv "$TEMP_DIR/dist" .
+        rm -rf "$TEMP_DIR"
+        echo "Backup restored successfully"
+        report_status "success"
+        exit 0
+    fi
+fi
+
 # Generate static site
 yarn generate --fail-on-error
 
