@@ -28,7 +28,7 @@ fi
 yarn generate --fail-on-error
 
 # Create zip file
-ZIP_NAME="dist-${CF_PAGES_COMMIT_SHA}.zip"
+ZIP_NAME="dist_$(date +%Y%m%d%H%M%S)_${CF_PAGES_COMMIT_SHA:0:8}.zip"
 tar -czf "$ZIP_NAME" dist/
 
 # Upload to R2 using wrangler

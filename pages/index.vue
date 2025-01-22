@@ -3,6 +3,6 @@
 
 <template>
   <div class="-page-home">
-    <h1>NEW HELLO WORLD</h1>
+    <h1>new zip name</h1>
   </div>
 </template>
